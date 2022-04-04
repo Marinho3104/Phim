@@ -5,9 +5,9 @@ import (
 	"net"
 	"strings"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/block"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/transaction"
+	"github.com/Marinho3104/Phim/src/structs/block"
+	"github.com/Marinho3104/Phim/src/structs/comite"
+	"github.com/Marinho3104/Phim/src/structs/transaction"
 )
 
 func Initialization(addr string, port string) *comite.ComiteServer {

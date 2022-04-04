@@ -3,8 +3,8 @@ package commoncomiteserver
 import (
 	"errors"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/common"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	"github.com/Marinho3104/Phim/src/common"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func RemoveComiteClient(comiteServer *comite.ComiteServer, _connClient comite.ComiteClientConnection) error {

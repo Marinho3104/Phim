@@ -1,8 +1,8 @@
 package mainapiserverfunctions
 
 import (
-	comite "github.com/Marinho3104/Phim-BlockChain/src/structs/Comite"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/apiServer"
+	"github.com/Marinho3104/Phim/src/structs/apiServer"
+	comite "github.com/Marinho3104/Phim/src/structs/comite"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,9 +1,9 @@
 package primatives
 
 import (
-	getblockchainfromfile "github.com/Marinho3104/Phim-BlockChain/src/comiteServer/commonComiteServer/getBlockChainFromFile"
-	maincomiteserverfunctions "github.com/Marinho3104/Phim-BlockChain/src/comiteServer/mainComiteServerFunctions"
-	acceptcomiteclientrequest "github.com/Marinho3104/Phim-BlockChain/src/comiteServer/requestReceived/acceptComiteClientRequest"
+	getblockchainfromfile "github.com/Marinho3104/Phim/src/comiteServer/commonComiteServer/getBlockChainFromFile"
+	maincomiteserverfunctions "github.com/Marinho3104/Phim/src/comiteServer/mainComiteServerFunctions"
+	acceptcomiteclientrequest "github.com/Marinho3104/Phim/src/comiteServer/requestReceived/acceptComiteClientRequest"
 )
 
 func ComiteServerOperational() {

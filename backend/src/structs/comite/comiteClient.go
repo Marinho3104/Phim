@@ -3,7 +3,7 @@ package comite
 import (
 	"net"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/block"
+	"github.com/Marinho3104/Phim/src/structs/block"
 )
 
 type ComiteClient struct {

@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func GetWork(comiteClient *comite.ComiteClient) {

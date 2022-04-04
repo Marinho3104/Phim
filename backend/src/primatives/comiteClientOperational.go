@@ -1,8 +1,8 @@
 package primatives
 
 import (
-	work "github.com/Marinho3104/Phim-BlockChain/src/comiteClient/Work"
-	maincomiteclientfunctions "github.com/Marinho3104/Phim-BlockChain/src/comiteClient/mainComiteClientFunctions"
+	maincomiteclientfunctions "github.com/Marinho3104/Phim/src/comiteClient/mainComiteClientFunctions"
+	work "github.com/Marinho3104/Phim/src/comiteClient/work"
 )
 
 func ComiteClientOperational() {

@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/block"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	"github.com/Marinho3104/Phim/src/structs/block"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func GetBlockChainFromFile(comiteServer *comite.ComiteServer) error {

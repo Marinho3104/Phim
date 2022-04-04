@@ -3,7 +3,7 @@ package acceptcomiteclientrequest
 import (
 	"fmt"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func AcceptComiteClient(comiteServer *comite.ComiteServer) {

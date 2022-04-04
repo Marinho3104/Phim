@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/comiteClient/Work/handleWorkFunctions/synchronization"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	"github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/synchronization"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func HandleWork(comiteClient *comite.ComiteClient, workReceived []string) (all []byte) {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	commoncomiteserver "github.com/Marinho3104/Phim-BlockChain/src/comiteServer/commonComiteServer/removeVariable"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	commoncomiteserver "github.com/Marinho3104/Phim/src/comiteServer/commonComiteServer/removeVariable"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func GetResponse(comiteServer *comite.ComiteServer, _connClient comite.ComiteClientConnection) {

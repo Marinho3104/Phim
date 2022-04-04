@@ -3,7 +3,7 @@ package synchronization
 import (
 	"fmt"
 
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func HandleSynchronization(comiteClient *comite.ComiteClient, workReceived []string, index int) int {

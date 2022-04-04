@@ -3,8 +3,8 @@ package acceptcomiteclientrequest
 import (
 	"net"
 
-	confirmContractOwnershipafter "github.com/Marinho3104/Phim-BlockChain/src/comiteServer/requestReceived/acceptComiteClientRequest/confirmContractOwnershipAfter"
-	"github.com/Marinho3104/Phim-BlockChain/src/structs/comite"
+	confirmContractOwnershipafter "github.com/Marinho3104/Phim/src/comiteServer/requestReceived/acceptComiteClientRequest/confirmContractOwnershipAfter"
+	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func HandleComiteClientRequest(comiteServer *comite.ComiteServer, _conn net.Conn) {

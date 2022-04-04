@@ -1,4 +1,4 @@
-module github.com/Marinho3104/Phim-BlockChain
+module github.com/Marinho3104/Phim
 
 go 1.17
 

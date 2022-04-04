@@ -1,7 +1,7 @@
 package apiServer
 
 import (
-	comite "github.com/Marinho3104/Phim-BlockChain/src/structs/Comite"
+	comite "github.com/Marinho3104/Phim/src/structs/comite"
 	"github.com/gin-gonic/gin"
 )
 

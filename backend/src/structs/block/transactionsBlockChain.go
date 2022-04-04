@@ -1,6 +1,6 @@
 package block
 
-import "github.com/Marinho3104/Phim-BlockChain/src/structs/transaction"
+import "github.com/Marinho3104/Phim/src/structs/transaction"
 
 type TransactionBlock struct {
 	Id               int                       `json:"id"`
