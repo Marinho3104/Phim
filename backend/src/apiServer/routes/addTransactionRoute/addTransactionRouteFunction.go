@@ -5,12 +5,13 @@ import (
 	"net/http"
 	"time"
 
+	addtransactiontotransactionsincheck "github.com/Marinho3104/Phim/src/comiteServer/requestReceived/addTransactionToTransactionsInCheck"
 	"github.com/Marinho3104/Phim/src/structs/apiServer"
 	"github.com/Marinho3104/Phim/src/structs/transaction"
 	"github.com/gin-gonic/gin"
 )
 
-func AddTransaction(_server *apiServer.ApiServer) gin.HandlerFunc {
+func AddTransactionRouteFunction(_server *apiServer.ApiServer) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 
@@ -35,7 +36,7 @@ func AddTransaction(_server *apiServer.ApiServer) gin.HandlerFunc {
 			ComiteReviewerAddress: "",
 		}
 
-		//confirmtransactionrequest.HandleTrasactionRequest(_server.Comite_Server, _currentTransation)
+		addtransactiontotransactionsincheck.AddTransactionToTransactionsInCheck(&_server.Comite_Server, _currentTransation)
 
 		c.String(http.StatusOK, "Done")
 

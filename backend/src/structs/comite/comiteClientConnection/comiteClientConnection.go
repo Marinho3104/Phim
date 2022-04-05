@@ -1,4 +1,4 @@
-package comite
+package comiteclientconnection
 
 import "net"
 

@@ -1,14 +1,15 @@
 package transaction
 
-import "net"
+import (
+	comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/comiteClientConnection"
+)
 
 type ConfirmationTransaction struct {
 	Hash256              string
 	Transation           Transaction
-	ComiteChoose         net.Conn
+	ComiteChoose         comiteclientconnection.ComiteClientConnection
 	ComiteChooseResponse int
-	ComiteChooseAddress  string
-	ComiteTotal          []net.Conn
-	ComiteAccepted       []net.Conn
-	ComiteDeclined       []net.Conn
+	ComiteTotal          []comiteclientconnection.ComiteClientConnection
+	ComiteAccepted       []comiteclientconnection.ComiteClientConnection
+	ComiteDeclined       []comiteclientconnection.ComiteClientConnection
 }

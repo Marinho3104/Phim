@@ -5,11 +5,12 @@ import (
 
 	"github.com/Marinho3104/Phim/src/common"
 	"github.com/Marinho3104/Phim/src/structs/comite"
+	comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/comiteClientConnection"
 )
 
-func RemoveComiteClient(comiteServer *comite.ComiteServer, _connClient comite.ComiteClientConnection) error {
+func RemoveComiteClient(comiteServer *comite.ComiteServer, _connClient comiteclientconnection.ComiteClientConnection) error {
 
-	_newComiteList := []comite.ComiteClientConnection{}
+	_newComiteList := []comiteclientconnection.ComiteClientConnection{}
 	_removed := false
 
 	for _, v := range <-comiteServer.ComiteClientList {

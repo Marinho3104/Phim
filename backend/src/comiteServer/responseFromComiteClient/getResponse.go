@@ -6,9 +6,10 @@ import (
 
 	commoncomiteserver "github.com/Marinho3104/Phim/src/comiteServer/commonComiteServer/removeVariable"
 	"github.com/Marinho3104/Phim/src/structs/comite"
+	comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/comiteClientConnection"
 )
 
-func GetResponse(comiteServer *comite.ComiteServer, _connClient comite.ComiteClientConnection) {
+func GetResponse(comiteServer *comite.ComiteServer, _connClient comiteclientconnection.ComiteClientConnection) {
 
 	all := []byte("")
 

@@ -5,6 +5,7 @@ import (
 
 	confirmContractOwnershipafter "github.com/Marinho3104/Phim/src/comiteServer/requestReceived/acceptComiteClientRequest/confirmContractOwnershipAfter"
 	"github.com/Marinho3104/Phim/src/structs/comite"
+	comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/comiteClientConnection"
 )
 
 func HandleComiteClientRequest(comiteServer *comite.ComiteServer, _conn net.Conn) {
@@ -21,7 +22,7 @@ func HandleComiteClientRequest(comiteServer *comite.ComiteServer, _conn net.Conn
 
 	if ConfirmContractOwnerShip(contractInfo) {
 
-		_connClient := comite.ComiteClientConnection{
+		_connClient := comiteclientconnection.ComiteClientConnection{
 			Connection: _conn,
 			Address:    string(contractInfo),
 		}

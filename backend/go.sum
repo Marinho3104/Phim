@@ -1,5 +1,7 @@
 github.com/Marinho3104/FullyMal94 v0.0.0-20220320174905-16d2369414e9 h1:xRyx/KK0/baHVFEyuXWm91CP5ZfHCyN9nPvS7H5l+XQ=
 github.com/Marinho3104/FullyMal94 v0.0.0-20220320174905-16d2369414e9/go.mod h1:fK+MIuP8i4cxrP4eqGEGZ9H83OH8gSHvFJYL3C4h+Dk=
+github.com/benbjohnson/clock v1.3.0 h1:ip6w0uFQkncKQ979AypyG0ER7mqUSBdKLOgAle/AT8A=
+github.com/benbjohnson/clock v1.3.0/go.mod h1:J11/hYXuz8f4ySSvYwY0FKfm+ezbsZBKZxNJlLklBHA=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=

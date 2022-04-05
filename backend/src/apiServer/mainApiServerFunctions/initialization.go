@@ -12,7 +12,7 @@ func Initialization(comiteServer *comite.ComiteServer) *apiServer.ApiServer {
 
 	return &apiServer.ApiServer{
 		Route:         router,
-		Comite_Server: comiteServer,
+		Comite_Server: (*comiteServer),
 	}
 
 }

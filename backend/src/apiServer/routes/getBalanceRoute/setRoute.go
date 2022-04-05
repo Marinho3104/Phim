@@ -1,9 +1,9 @@
-package addtransactionroute
+package getbalanceroute
 
 import "github.com/Marinho3104/Phim/src/structs/apiServer"
 
 func SetRoute(serverPriv *apiServer.ApiServer) {
 
-	serverPriv.Route.POST("/addTransation", AddTransactionRouteFunction(serverPriv))
+	serverPriv.Route.POST("/getBalance", GetBalanceRouteFunction(serverPriv))
 
 }

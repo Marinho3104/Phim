@@ -4,13 +4,19 @@ import (
 	"net"
 
 	"github.com/Marinho3104/Phim/src/structs/block"
+	comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/comiteClientConnection"
 	"github.com/Marinho3104/Phim/src/structs/transaction"
 )
 
 type ComiteServer struct {
 	ComiteServerListener net.Listener
-	ComiteClientList     chan []ComiteClientConnection
+	ComiteClientList     chan []comiteclientconnection.ComiteClientConnection
 
-	BlockChainTransaction chan []block.TransactionBlock
-	TransactionInCheck    chan []transaction.ConfirmationTransaction
+	TransactionGroup []comiteclientconnection.ComiteClientConnection
+
+	CurrentBlockId int
+
+	BlockChainTransaction     chan []block.TransactionBlock
+	TransactionInCheck        chan []transaction.Transaction
+	TransactionInConfirmation chan []transaction.ConfirmationTransaction
 }
