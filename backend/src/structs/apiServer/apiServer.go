@@ -7,5 +7,5 @@ import (
 
 type ApiServer struct {
 	Route         *gin.Engine
-	Comite_Server comite.ComiteServer
+	Comite_Server *comite.ComiteServer
 }

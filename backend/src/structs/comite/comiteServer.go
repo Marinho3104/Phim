@@ -17,6 +17,7 @@ type ComiteServer struct {
 	CurrentBlockId int
 
 	BlockChainTransaction     chan []block.TransactionBlock
-	TransactionInCheck        chan []transaction.Transaction
 	TransactionInConfirmation chan []transaction.ConfirmationTransaction
+
+	Count chan int
 }

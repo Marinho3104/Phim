@@ -10,5 +10,7 @@ func ComiteClientOperational() {
 
 	maincomiteclientfunctions.SendContractOwnershipProve(comiteClient)
 
+	go work.HandleWork(comiteClient)
+
 	work.GetWork(comiteClient)
 }

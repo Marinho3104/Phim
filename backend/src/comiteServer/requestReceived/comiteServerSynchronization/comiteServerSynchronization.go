@@ -8,6 +8,7 @@ import (
 
 	commoncomiteserver "github.com/Marinho3104/Phim/src/comiteServer/commonComiteServer/removeVariable"
 	reponsefromcomiteclient "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient"
+	sendtocomiteclient "github.com/Marinho3104/Phim/src/comiteServer/sendToComiteClient"
 	"github.com/Marinho3104/Phim/src/structs/comite"
 	comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/comiteClientConnection"
 )
@@ -49,6 +50,8 @@ func ComiteServerSynchronization(comiteServer *comite.ComiteServer, _connClient 
 
 	fmt.Println("All blockchains sended and comit is added to blokcchain !!")
 
-	reponsefromcomiteclient.GetResponse(comiteServer, _connClient)
+	go reponsefromcomiteclient.GetResponse(comiteServer, _connClient)
+
+	sendtocomiteclient.SendWorkToComiteClient(_connClient)
 
 }

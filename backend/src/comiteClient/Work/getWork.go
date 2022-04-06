@@ -3,14 +3,11 @@ package work
 import (
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
 func GetWork(comiteClient *comite.ComiteClient) {
-
-	all := []byte("")
 
 	fmt.Println("Getting work")
 
@@ -26,11 +23,8 @@ func GetWork(comiteClient *comite.ComiteClient) {
 
 		resp = resp[:_len]
 
-		all = append(all, resp...)
+		comiteClient.WorkInQueue <- <-comiteClient.WorkInQueue + string(resp)
 
-		respSplit := strings.Split(string(all), "\n")
-
-		all = HandleWork(comiteClient, respSplit)
 	}
 
 }

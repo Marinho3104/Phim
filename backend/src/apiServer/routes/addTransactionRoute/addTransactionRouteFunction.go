@@ -3,9 +3,8 @@ package addtransactionroute
 import (
 	"fmt"
 	"net/http"
-	"time"
 
-	addtransactiontotransactionsincheck "github.com/Marinho3104/Phim/src/comiteServer/requestReceived/addTransactionToTransactionsInCheck"
+	sendtransaction "github.com/Marinho3104/Phim/src/comiteServer/sendToComiteClient/sendTransaction"
 	"github.com/Marinho3104/Phim/src/structs/apiServer"
 	"github.com/Marinho3104/Phim/src/structs/transaction"
 	"github.com/gin-gonic/gin"
@@ -26,7 +25,6 @@ func AddTransactionRouteFunction(_server *apiServer.ApiServer) gin.HandlerFunc {
 		fmt.Sscan(c.PostForm("fee"), &fee)
 
 		var _currentTransation transaction.Transaction = transaction.Transaction{
-			Time:                  time.Now().UnixNano(),
 			AddressFrom:           c.PostForm("addressFrom"),
 			AddressTo:             c.PostForm("addressTo"),
 			Amount:                amount,
@@ -36,7 +34,7 @@ func AddTransactionRouteFunction(_server *apiServer.ApiServer) gin.HandlerFunc {
 			ComiteReviewerAddress: "",
 		}
 
-		addtransactiontotransactionsincheck.AddTransactionToTransactionsInCheck(&_server.Comite_Server, _currentTransation)
+		sendtransaction.GetTransactions(_server.Comite_Server, _currentTransation)
 
 		c.String(http.StatusOK, "Done")
 

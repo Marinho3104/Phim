@@ -33,7 +33,6 @@ func HandleTransactionConfirmation(comiteClient *comite.ComiteClient, transactio
 		} else {
 
 			_transaction = transaction.Transaction{
-				Time:                  _transaction.Time,
 				AddressFrom:           _transaction.AddressFrom,
 				AddressTo:             "",
 				Amount:                0,
@@ -49,7 +48,6 @@ func HandleTransactionConfirmation(comiteClient *comite.ComiteClient, transactio
 		comiteClient.BlockChainTransaction <- addtransactiontoblockchain.AddTransactionToBlockChain(<-comiteClient.BlockChainTransaction, comiteClient.CurrentBlockId, _transaction)
 
 		handleworkfunctions.SendResponseToComiteServer(comiteClient.Connection, []string{transactionConfirmationRequest[0], resp})
-
 	}
 
 }

@@ -19,6 +19,8 @@ func Initialization(addr, port string) *comite.ComiteClient {
 		Connection:            connection,
 		BlockChainTransaction: make(chan []block.TransactionBlock, 1),
 		WorkAfterSynchronize:  make(chan []interface{}, 1),
+		Count:                 make(chan int, 1),
+		WorkInQueue:           make(chan string, 1),
 	}
 
 	initializaVariablesComiteClient(comiteClient)
@@ -30,6 +32,10 @@ func Initialization(addr, port string) *comite.ComiteClient {
 func initializaVariablesComiteClient(comiteClient *comite.ComiteClient) {
 
 	comiteClient.WorkAfterSynchronize <- []interface{}{}
+
+	comiteClient.WorkInQueue <- ""
+
+	comiteClient.Count <- 0
 }
 
 func createConnection(addr string, port string) (net.Conn, error) {

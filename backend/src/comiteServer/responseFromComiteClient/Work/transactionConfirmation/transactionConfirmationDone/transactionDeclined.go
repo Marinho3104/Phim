@@ -9,7 +9,6 @@ import (
 func TransactionDeclined(comiteServer *comite.ComiteServer, _transactionConfirmation transaction.ConfirmationTransaction) {
 
 	_transactionDeclined := transaction.Transaction{
-		Time:                  _transactionConfirmation.Transation.Time,
 		AddressFrom:           _transactionConfirmation.Transation.AddressFrom,
 		AddressTo:             "",
 		Amount:                0,

@@ -20,13 +20,12 @@ func Initialization(addr string, port string) *comite.ComiteServer {
 	}
 
 	comiteServer := &comite.ComiteServer{
-		ComiteServerListener: _listenner,
-		ComiteClientList:     make(chan []comiteclientconnection.ComiteClientConnection, 1),
-
+		ComiteServerListener:      _listenner,
+		ComiteClientList:          make(chan []comiteclientconnection.ComiteClientConnection, 1),
 		BlockChainTransaction:     make(chan []block.TransactionBlock, 1),
-		TransactionInCheck:        make(chan []transaction.Transaction, 1),
 		TransactionInConfirmation: make(chan []transaction.ConfirmationTransaction, 1),
 		TransactionGroup:          []comiteclientconnection.ComiteClientConnection{},
+		Count:                     make(chan int, 1),
 	}
 
 	initializaVariablesComiteServer(comiteServer)
@@ -52,8 +51,8 @@ func initializaVariablesComiteServer(comiteServer *comite.ComiteServer) {
 
 	comiteServer.BlockChainTransaction <- []block.TransactionBlock{}
 
-	comiteServer.TransactionInCheck <- []transaction.Transaction{}
-
 	comiteServer.TransactionInConfirmation <- []transaction.ConfirmationTransaction{}
+
+	comiteServer.Count <- 0
 
 }

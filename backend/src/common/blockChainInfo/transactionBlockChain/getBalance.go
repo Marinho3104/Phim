@@ -1,8 +1,12 @@
 package transactionblockchain
 
-import "github.com/Marinho3104/Phim/src/structs/block"
+import (
+	"github.com/Marinho3104/Phim/src/structs/block"
+)
 
 func GetBalance(transactionBlockChain []block.TransactionBlock, address string) (balance int) {
+
+	balance = 0
 
 	for b := len(transactionBlockChain) - 1; b >= 0; b-- {
 
@@ -12,6 +16,7 @@ func GetBalance(transactionBlockChain []block.TransactionBlock, address string) 
 
 				balance -= transactionBlockChain[b].Data[t].Amount
 				balance -= transactionBlockChain[b].Data[t].Fee
+
 			}
 			if transactionBlockChain[b].Data[t].AddressTo == address {
 				balance += transactionBlockChain[b].Data[t].Amount

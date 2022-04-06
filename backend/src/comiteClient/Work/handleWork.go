@@ -1,6 +1,7 @@
 package work
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/synchronization"
@@ -8,34 +9,51 @@ import (
 	"github.com/Marinho3104/Phim/src/structs/comite"
 )
 
-func HandleWork(comiteClient *comite.ComiteClient, workReceived []string) (all []byte) {
+func HandleWork(comiteClient *comite.ComiteClient) {
 
-	all = []byte("")
+	for {
 
-	for index := 0; index < len(workReceived); index += 2 {
-		if len(workReceived)-1 == index {
-			all = []byte(workReceived[index])
-			return
+		_checker := true
+
+		_workToDo := <-comiteClient.WorkInQueue
+
+		respSplit := strings.Split(string(_workToDo), "\n")
+
+		for index := 0; index < len(respSplit); index += 2 {
+
+			if index == len(respSplit)-1 {
+				comiteClient.WorkInQueue <- respSplit[index]
+				_checker = false
+				break
+			}
+
+			if respSplit[index] == "Start Synchronize" {
+
+				index = synchronization.HandleSynchronization(comiteClient, respSplit, index)
+
+				if index == -1 {
+					comiteClient.WorkInQueue <- respSplit[index]
+					_checker = false
+					break
+				}
+
+			} else {
+
+				_headerSplit := strings.Split(respSplit[index], "-")
+
+				fmt.Println(_headerSplit[0])
+
+				if _headerSplit[0] == "Transaction To Confirm" {
+
+					transactionconfirmation.HandleTransactionConfirmation(comiteClient, respSplit[index:index+2])
+				}
+			}
+
 		}
 
-		if workReceived[index] == "Start Synchronize" {
-
-			index = synchronization.HandleSynchronization(comiteClient, workReceived, index)
-
-			if index == -1 {
-				all = []byte(strings.Join(workReceived[index:], "\n"))
-				return
-			}
-
-		} else {
-
-			_headerSplit := strings.Split(workReceived[index], "-")
-
-			if _headerSplit[0] == "Transaction To Confirm" {
-				transactionconfirmation.HandleTransactionConfirmation(comiteClient, workReceived[index:index+2])
-			}
+		if _checker {
+			comiteClient.WorkInQueue <- ""
 		}
 	}
 
-	return
 }

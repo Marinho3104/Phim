@@ -1,6 +1,7 @@
 package sendtransaction
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -12,11 +13,7 @@ import (
 	"github.com/Marinho3104/Phim/src/structs/transaction"
 )
 
-func CreateConfirmationVariableAndSendToComite(comiteServer *comite.ComiteServer, _transaction transaction.Transaction) {
-
-	_comiteList := <-comiteServer.ComiteClientList
-
-	comiteServer.ComiteClientList <- _comiteList
+func CreateConfirmationVariableAndSendToComite(comiteServer *comite.ComiteServer, _transaction transaction.Transaction, _comiteList []comiteclientconnection.ComiteClientConnection) []byte {
 
 	comiteChoose := sendtocomiteclient.GetComiteChoose(_comiteList, rand.Intn(len(_comiteList)))
 
@@ -37,11 +34,12 @@ func CreateConfirmationVariableAndSendToComite(comiteServer *comite.ComiteServer
 
 	comiteServer.TransactionInConfirmation <- append(<-comiteServer.TransactionInConfirmation, _transactioConfirmation)
 
-	sendtocomiteclient.SendToComiteClient(
-		comiteServer,
-		_comiteList,
-		("Transaction To Confirm-" + _transactioConfirmation.Hash256),
-		_transaction,
+	return bytes.Join(
+		[][]byte{
+			[]byte("Transaction To Confirm-" + _transactioConfirmation.Hash256),
+			_transactionByteForm,
+			[]byte(""),
+		},
+		[]byte("\n"),
 	)
-
 }

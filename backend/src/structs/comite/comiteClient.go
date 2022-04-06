@@ -11,7 +11,11 @@ type ComiteClient struct {
 
 	Synchronized bool
 
+	WorkInQueue chan string
+
 	BlockChainTransaction chan []block.TransactionBlock
 	WorkAfterSynchronize  chan []interface{}
 	CurrentBlockId        int
+
+	Count chan int
 }

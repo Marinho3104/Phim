@@ -25,7 +25,10 @@ func HandleComiteClientRequest(comiteServer *comite.ComiteServer, _conn net.Conn
 		_connClient := comiteclientconnection.ComiteClientConnection{
 			Connection: _conn,
 			Address:    string(contractInfo),
+			WorkToDo:   make(chan []byte, 1),
 		}
+
+		_connClient.WorkToDo <- []byte("")
 
 		confirmContractOwnershipafter.ContractOwnershipAccepted(comiteServer, _connClient)
 	}

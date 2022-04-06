@@ -15,7 +15,9 @@ func GetResponse(comiteServer *comite.ComiteServer, _connClient comiteclientconn
 
 	for {
 
-		resp := make([]byte, 150000)
+		//fmt.Println("Getting response ...")
+
+		resp := make([]byte, 15000000)
 
 		_len, err := _connClient.Connection.Read(resp)
 
@@ -28,13 +30,15 @@ func GetResponse(comiteServer *comite.ComiteServer, _connClient comiteclientconn
 
 		}
 
+		//fmt.Println("Response obtained ...")
+
 		resp = resp[:_len]
 
 		all = append(all, resp...)
 
 		respSplit := strings.Split(string(all), "\n")
 
-		HandleComiteResponse(comiteServer, _connClient, respSplit)
+		all = HandleComiteResponse(comiteServer, _connClient, respSplit)
 
 	}
 

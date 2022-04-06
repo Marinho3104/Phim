@@ -8,13 +8,13 @@ def sendTransactions(privateAddress, addressFrom, addressTo, amount, c):
     
     data = {"addressFrom": addressFrom, "addressTo": addressTo, "amount": amount, "c": c, "sign": "", "fee": 1}
 
-    requests.post("http://localhost:8000/addTransation", data = data)
+    requests.post("http://localhost:8000/addTransation", data = data, timeout=100)
 
 def getBalance():
     
     data = {"address": "eu"}
 
-    resp = requests.post("http://localhost:8000/getBalance", data = data)
+    resp = requests.post("http://localhost:8000/getBalance", data = data, timeout=100)
 
     return resp.text
 
@@ -24,7 +24,8 @@ while True:
 
     for _ in range(1):
 
-        _thread.start_new_thread(sendTransactions, ("ola", "eu", "mim", 10 + _, 1,))
+        _thread.start_new_thread(sendTransactions, ("ola", "eu", "mim", 10, _,))
 
-    time.sleep(2)
+        print(_)
+        print("----------")
 
