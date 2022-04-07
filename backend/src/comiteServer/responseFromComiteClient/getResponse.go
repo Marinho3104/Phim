@@ -2,7 +2,6 @@ package reponsefromcomiteclient
 
 import (
 	"fmt"
-	"strings"
 
 	commoncomiteserver "github.com/Marinho3104/Phim/src/comiteServer/commonComiteServer/removeVariable"
 	"github.com/Marinho3104/Phim/src/structs/comite"
@@ -11,13 +10,11 @@ import (
 
 func GetResponse(comiteServer *comite.ComiteServer, _connClient comiteclientconnection.ComiteClientConnection) {
 
-	all := []byte("")
-
 	for {
 
 		//fmt.Println("Getting response ...")
 
-		resp := make([]byte, 15000000)
+		resp := make([]byte, 150000)
 
 		_len, err := _connClient.Connection.Read(resp)
 
@@ -30,15 +27,9 @@ func GetResponse(comiteServer *comite.ComiteServer, _connClient comiteclientconn
 
 		}
 
-		//fmt.Println("Response obtained ...")
-
 		resp = resp[:_len]
 
-		all = append(all, resp...)
-
-		respSplit := strings.Split(string(all), "\n")
-
-		all = HandleComiteResponse(comiteServer, _connClient, respSplit)
+		_connClient.AnswerToCheck <- <-_connClient.AnswerToCheck + string(resp)
 
 	}
 

@@ -17,9 +17,19 @@ func SetBlockChains(comiteClient *comite.ComiteClient, _blockChainsInfo []string
 		return err
 	}
 
+	_contractBlockChain := []block.ContractBlock{}
+
+	err = json.Unmarshal([]byte(_blockChainsInfo[1]), &_contractBlockChain)
+
+	if err != nil {
+		return err
+	}
+
 	comiteClient.CurrentBlockId = len(_transactionBlockChain) - 1
 
 	comiteClient.BlockChainTransaction <- _transactionBlockChain
+
+	comiteClient.BlockChainContract <- _contractBlockChain
 
 	comiteClient.Synchronized = true
 

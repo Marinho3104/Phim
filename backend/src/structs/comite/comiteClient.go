@@ -13,9 +13,11 @@ type ComiteClient struct {
 
 	WorkInQueue chan string
 
-	BlockChainTransaction chan []block.TransactionBlock
-	WorkAfterSynchronize  chan []interface{}
-	CurrentBlockId        int
+	BlockChainTransaction          chan []block.TransactionBlock
+	BlockChainContract             chan []block.ContractBlock
+	BlockChainContractInteractions chan []block.ContractInteractionsBlockChain
+	WorkAfterSynchronize           chan []interface{}
+	CurrentBlockId                 int
 
 	Count chan int
 }

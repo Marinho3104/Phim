@@ -27,7 +27,13 @@ func ComiteServerSynchronization(comiteServer *comite.ComiteServer, _connClient 
 
 	comiteServer.BlockChainTransaction <- _blockChainTransactions
 
-	_blockChainTransactionByteForm, err := json.Marshal(_blockChainTransactions)
+	_blockChainTransactionByteForm, _ := json.Marshal(_blockChainTransactions)
+
+	_blockchainContract := <-comiteServer.BlockChainContract
+
+	comiteServer.BlockChainContract <- _blockchainContract
+
+	_blockChainContractByteForm, err := json.Marshal(_blockchainContract)
 
 	if err != nil {
 
@@ -41,6 +47,7 @@ func ComiteServerSynchronization(comiteServer *comite.ComiteServer, _connClient 
 		[][]byte{
 			[]byte(msgStartSync),
 			_blockChainTransactionByteForm,
+			_blockChainContractByteForm,
 			[]byte(msgEndSync),
 			[]byte(""),
 		},
@@ -51,6 +58,8 @@ func ComiteServerSynchronization(comiteServer *comite.ComiteServer, _connClient 
 	fmt.Println("All blockchains sended and comit is added to blokcchain !!")
 
 	go reponsefromcomiteclient.GetResponse(comiteServer, _connClient)
+
+	go reponsefromcomiteclient.HandleComiteResponse(comiteServer, _connClient)
 
 	sendtocomiteclient.SendWorkToComiteClient(_connClient)
 

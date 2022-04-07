@@ -1,9 +1,9 @@
 package work
 
 import (
-	"fmt"
 	"strings"
 
+	contractconfirmation "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/contractCreationConfirmation"
 	"github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/synchronization"
 	transactionconfirmation "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/transactionConfirmation"
 	"github.com/Marinho3104/Phim/src/structs/comite"
@@ -41,11 +41,11 @@ func HandleWork(comiteClient *comite.ComiteClient) {
 
 				_headerSplit := strings.Split(respSplit[index], "-")
 
-				fmt.Println(_headerSplit[0])
-
 				if _headerSplit[0] == "Transaction To Confirm" {
 
 					transactionconfirmation.HandleTransactionConfirmation(comiteClient, respSplit[index:index+2])
+				} else if _headerSplit[0] == "Contract Creation" {
+					contractconfirmation.HandleContractConfirmation(comiteClient, respSplit[index:index+2])
 				}
 			}
 

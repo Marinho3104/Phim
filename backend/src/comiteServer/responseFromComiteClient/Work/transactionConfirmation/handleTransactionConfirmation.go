@@ -1,4 +1,4 @@
-package handleworkfunctions
+package transactionconfirmation
 
 import (
 	transactionconfirmationdone "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient/Work/transactionConfirmation/transactionConfirmationDone"

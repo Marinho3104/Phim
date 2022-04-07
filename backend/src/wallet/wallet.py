@@ -2,30 +2,65 @@ import time
 import requests
 import _thread
 
-def sendTransactions(privateAddress, addressFrom, addressTo, amount, c):
+class WalletPhim:
 
-    #textToSign = hashlib.sha256((addressFrom).encode('utf-8')).hexdigest() + hashlib.sha256((addressTo).encode('utf-8')).hexdigest() + hashlib.sha256((str(amount)).encode('utf-8')).hexdigest() + hashlib.sha256((str(c)).encode('utf-8')).hexdigest()
-    
-    data = {"addressFrom": addressFrom, "addressTo": addressTo, "amount": amount, "c": c, "sign": "", "fee": 1}
+    def __init__(self, address, privateAddress):
 
-    requests.post("http://localhost:8000/addTransation", data = data, timeout=100)
+        self.address = address
+        self.privateAddress = privateAddress
+        self.currentBalance = 0
+        self.cTransaction = 0
+        self.cContract = 0
 
-def getBalance():
-    
-    data = {"address": "eu"}
+    def sendTransactions(self, addressTo, amount):
+        
+        data = {"addressFrom": self.address, "addressTo": addressTo, "amount": amount, "c": self.cTransaction, "sign": "", "fee": 1}
 
-    resp = requests.post("http://localhost:8000/getBalance", data = data, timeout=100)
+        requests.post("http://localhost:8000/addTransation", data = data, timeout=100)
 
-    return resp.text
+    def sendContract(self):
+
+        data = {"address": self.address, "contractName": "contractName", "data": self.getContractData("contractTest.py"), "c": self.cContract, "sign": "signtest", "fee": 1}
+
+        requests.post("http://localhost:8000/addContract", data = data, timeout=100)
+
+    def getBalance(self):
+        
+        data = {"address": self.address}
+
+        resp = requests.post("http://localhost:8000/getBalance", data = data, timeout=100)
+
+        self.currentBalance = int(resp.text)
+
+        return resp.text
+
+    def getContractData(self, contractFileName):
+
+        with open(contractFileName, 'r') as file:
+
+            return ''.join([_ for _ in file.readlines()])
+
+
+
+
+wallet = WalletPhim("eu", "o")
 
 while True:
 
-    input(getBalance())
+    resp = input("1 - Send Transaction\n2 - Send Contract\n3 - Get Balance\n --> ")
 
-    for _ in range(1):
+    if int(resp) == 1:
 
-        _thread.start_new_thread(sendTransactions, ("ola", "eu", "mim", 10, _,))
+        addressTo = input("Address to -> ")
+        amount = input("Amount -> ")
 
-        print(_)
-        print("----------")
+        wallet.sendTransactions(addressTo, amount)
+
+    elif int(resp) == 2:
+
+        wallet.sendContract()
+
+    elif int(resp) == 3:
+
+        print(wallet.getBalance())
 

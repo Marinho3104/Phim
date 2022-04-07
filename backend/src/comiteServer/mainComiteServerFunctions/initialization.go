@@ -8,6 +8,7 @@ import (
 	"github.com/Marinho3104/Phim/src/structs/block"
 	"github.com/Marinho3104/Phim/src/structs/comite"
 	comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/comiteClientConnection"
+	"github.com/Marinho3104/Phim/src/structs/contract"
 	"github.com/Marinho3104/Phim/src/structs/transaction"
 )
 
@@ -23,6 +24,8 @@ func Initialization(addr string, port string) *comite.ComiteServer {
 		ComiteServerListener:      _listenner,
 		ComiteClientList:          make(chan []comiteclientconnection.ComiteClientConnection, 1),
 		BlockChainTransaction:     make(chan []block.TransactionBlock, 1),
+		BlockChainContract:        make(chan []block.ContractBlock, 1),
+		ContractConfirmation:      make(chan []contract.ConfirmationContract, 1),
 		TransactionInConfirmation: make(chan []transaction.ConfirmationTransaction, 1),
 		TransactionGroup:          []comiteclientconnection.ComiteClientConnection{},
 		Count:                     make(chan int, 1),
@@ -51,7 +54,11 @@ func initializaVariablesComiteServer(comiteServer *comite.ComiteServer) {
 
 	comiteServer.BlockChainTransaction <- []block.TransactionBlock{}
 
+	comiteServer.BlockChainContract <- []block.ContractBlock{}
+
 	comiteServer.TransactionInConfirmation <- []transaction.ConfirmationTransaction{}
+
+	comiteServer.ContractConfirmation <- []contract.ConfirmationContract{}
 
 	comiteServer.Count <- 0
 

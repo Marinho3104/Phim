@@ -46,5 +46,31 @@ func GetBlockChainFromFile(comiteServer *comite.ComiteServer) (int, error) {
 
 	}
 
+	files, _ = ioutil.ReadDir(path + "\\data\\contractBlockChain")
+
+	for i := 0; i < len(files); i++ {
+
+		file, err := os.Open(path + fmt.Sprintf("\\data\\contractBlockChain\\%d", i))
+
+		if err != nil {
+			return _len, fmt.Errorf("UNABLE TO OPEN %s FILE", path+fmt.Sprintf("\\data\\contractBlockChain\\%d", i))
+		}
+
+		b, err := ioutil.ReadAll(file)
+
+		if err != nil {
+			return _len, fmt.Errorf("UNABLE TO READ THE CONTENT OF %d FILE", i)
+		}
+
+		_contractBlock := block.ContractBlock{}
+
+		json.Unmarshal(b, &_contractBlock)
+
+		_len++
+
+		comiteServer.BlockChainContract <- append(<-comiteServer.BlockChainContract, _contractBlock)
+
+	}
+
 	return _len, nil
 }
