@@ -21,14 +21,15 @@ func Initialization(addr string, port string) *comite.ComiteServer {
 	}
 
 	comiteServer := &comite.ComiteServer{
-		ComiteServerListener:      _listenner,
-		ComiteClientList:          make(chan []comiteclientconnection.ComiteClientConnection, 1),
-		BlockChainTransaction:     make(chan []block.TransactionBlock, 1),
-		BlockChainContract:        make(chan []block.ContractBlock, 1),
-		ContractConfirmation:      make(chan []contract.ConfirmationContract, 1),
-		TransactionInConfirmation: make(chan []transaction.ConfirmationTransaction, 1),
-		TransactionGroup:          []comiteclientconnection.ComiteClientConnection{},
-		Count:                     make(chan int, 1),
+		ComiteServerListener:           _listenner,
+		ComiteClientList:               make(chan []comiteclientconnection.ComiteClientConnection, 1),
+		BlockChainTransaction:          make(chan []block.TransactionBlock, 1),
+		BlockChainContract:             make(chan []block.ContractBlock, 1),
+		ContractConfirmation:           make(chan []contract.ConfirmationContract, 1),
+		TransactionInConfirmation:      make(chan []transaction.ConfirmationTransaction, 1),
+		BlockChainContractInteractions: make(chan []block.ContractInteractionsBlock, 1),
+		TransactionGroup:               []comiteclientconnection.ComiteClientConnection{},
+		Count:                          make(chan int, 1),
 	}
 
 	initializaVariablesComiteServer(comiteServer)
@@ -57,6 +58,8 @@ func initializaVariablesComiteServer(comiteServer *comite.ComiteServer) {
 	comiteServer.BlockChainContract <- []block.ContractBlock{}
 
 	comiteServer.TransactionInConfirmation <- []transaction.ConfirmationTransaction{}
+
+	comiteServer.BlockChainContractInteractions <- []block.ContractInteractionsBlock{}
 
 	comiteServer.ContractConfirmation <- []contract.ConfirmationContract{}
 

@@ -23,5 +23,7 @@ type ComiteServer struct {
 	BlockChainContract   chan []block.ContractBlock
 	ContractConfirmation chan []contract.ConfirmationContract
 
+	BlockChainContractInteractions chan []block.ContractInteractionsBlock
+
 	Count chan int
 }

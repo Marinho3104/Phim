@@ -16,12 +16,13 @@ func Initialization(addr, port string) *comite.ComiteClient {
 	}
 
 	comiteClient := &comite.ComiteClient{
-		Connection:            connection,
-		BlockChainTransaction: make(chan []block.TransactionBlock, 1),
-		BlockChainContract:    make(chan []block.ContractBlock, 1),
-		WorkAfterSynchronize:  make(chan []interface{}, 1),
-		Count:                 make(chan int, 1),
-		WorkInQueue:           make(chan string, 1),
+		Connection:                     connection,
+		BlockChainTransaction:          make(chan []block.TransactionBlock, 1),
+		BlockChainContract:             make(chan []block.ContractBlock, 1),
+		BlockChainContractInteractions: make(chan []block.ContractInteractionsBlock, 1),
+		WorkAfterSynchronize:           make(chan []interface{}, 1),
+		Count:                          make(chan int, 1),
+		WorkInQueue:                    make(chan string, 1),
 	}
 
 	initializaVariablesComiteClient(comiteClient)

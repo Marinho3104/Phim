@@ -35,6 +35,12 @@ func ComiteServerSynchronization(comiteServer *comite.ComiteServer, _connClient 
 
 	_blockChainContractByteForm, err := json.Marshal(_blockchainContract)
 
+	_blockChainContractInteraction := <-comiteServer.BlockChainContractInteractions
+
+	comiteServer.BlockChainContractInteractions <- _blockChainContractInteraction
+
+	_blockChainContractInteractionByteForm, _ := json.Marshal(_blockChainContractInteraction)
+
 	if err != nil {
 
 		commoncomiteserver.RemoveComiteClient(comiteServer, _connClient)
@@ -48,6 +54,7 @@ func ComiteServerSynchronization(comiteServer *comite.ComiteServer, _connClient 
 			[]byte(msgStartSync),
 			_blockChainTransactionByteForm,
 			_blockChainContractByteForm,
+			_blockChainContractInteractionByteForm,
 			[]byte(msgEndSync),
 			[]byte(""),
 		},

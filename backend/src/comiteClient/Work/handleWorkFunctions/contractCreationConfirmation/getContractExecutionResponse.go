@@ -13,7 +13,7 @@ func GetContractExecutionResponse(comiteClient *comite.ComiteClient, _contract c
 
 	comiteClient.BlockChainTransaction <- _blockChain
 
-	contractfunctions.WriteContract(_contract, transactionblockchain.GetBalance(_blockChain, _contract.ContractAddress), _contract.CreatorAddress, 0, _contract.Fee, make(map[string]interface{}), true)
+	contractfunctions.WriteContract(_contract, transactionblockchain.GetBalance(_blockChain, _contract.ContractAddress), transactionblockchain.GetC(_blockChain, _contract.ContractAddress)+1, _contract.CreatorAddress, 0, _contract.Fee, make(map[string]interface{}), true)
 
 	contractfunctions.WriteExecuter(_contract, "", make(map[string]interface{}))
 

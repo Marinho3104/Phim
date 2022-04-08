@@ -8,11 +8,11 @@ import (
 	"github.com/Marinho3104/Phim/src/structs/contract"
 )
 
-func WriteContract(_contract contract.Contract, contractBalance int, interactor string, interactorAmount int, fee int, variables map[string]interface{}, creation bool) {
+func WriteContract(_contract contract.Contract, contractBalance int, c int, interactor string, interactorAmount int, fee int, variables map[string]interface{}, creation bool) {
 
 	code := string(_contract.Data)
 
-	code += initDef(_contract.ContractAddress, interactor, contractBalance, fee, interactorAmount, variables, creation)
+	code += initDef(_contract.ContractAddress, interactor, contractBalance, fee, c, interactorAmount, variables, creation)
 
 	f, err := os.OpenFile("playground/contract.py", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
@@ -28,11 +28,11 @@ func WriteContract(_contract contract.Contract, contractBalance int, interactor 
 
 }
 
-func initDef(contractAddress, interactor string, contractBalance, fee, interactorAmount int, variables map[string]interface{}, creation bool) (_code string) {
+func initDef(contractAddress, interactor string, contractBalance, fee, c, interactorAmount int, variables map[string]interface{}, creation bool) (_code string) {
 
 	_code += "\n    def __init__(self) -> None:"
 
-	_code += fmt.Sprintf("\n        super().__init__(\"%s\", %d, %d, %s)", fixInvalidCharacters(contractAddress), contractBalance, fee, getInteractorInfo(interactor, interactorAmount))
+	_code += fmt.Sprintf("\n        super().__init__(\"%s\", %d, %d, %d, %s)", fixInvalidCharacters(contractAddress), contractBalance, fee, c, getInteractorInfo(interactor, interactorAmount))
 
 	_code += setVariables(variables)
 

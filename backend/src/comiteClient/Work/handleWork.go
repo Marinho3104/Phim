@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	contractconfirmation "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/contractCreationConfirmation"
+	contractinteractionconfirmation "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/contractInteractionConfirmation"
 	"github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/synchronization"
 	transactionconfirmation "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/transactionConfirmation"
 	"github.com/Marinho3104/Phim/src/structs/comite"
@@ -46,6 +47,8 @@ func HandleWork(comiteClient *comite.ComiteClient) {
 					transactionconfirmation.HandleTransactionConfirmation(comiteClient, respSplit[index:index+2])
 				} else if _headerSplit[0] == "Contract Creation" {
 					contractconfirmation.HandleContractConfirmation(comiteClient, respSplit[index:index+2])
+				} else if _headerSplit[0] == "Contract Interaction" {
+					contractinteractionconfirmation.HandleContractInteractionCofirmation()
 				}
 			}
 

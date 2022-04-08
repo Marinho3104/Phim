@@ -3,6 +3,7 @@ package reponsefromcomiteclient
 import (
 	"strings"
 
+	contractcreationconfirmation "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient/Work/contractCreationConfirmation"
 	transactionconfirmation "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient/Work/transactionConfirmation"
 
 	"github.com/Marinho3104/Phim/src/structs/comite"
@@ -32,6 +33,8 @@ func HandleComiteResponse(comiteServer *comite.ComiteServer, _connClient comitec
 
 			if headerSplit[0] == "Transaction To Confirm" {
 				transactionconfirmation.HandleTransactionConfirmation(comiteServer, _connClient, headerSplit[1], _responseSplit[index+1])
+			} else if headerSplit[0] == "Contract Creation" {
+				contractcreationconfirmation.HandleContractCreationConfirmation(comiteServer, _connClient, headerSplit[1], _responseSplit[index+1])
 			}
 		}
 

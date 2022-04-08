@@ -15,7 +15,7 @@ type ComiteClient struct {
 
 	BlockChainTransaction          chan []block.TransactionBlock
 	BlockChainContract             chan []block.ContractBlock
-	BlockChainContractInteractions chan []block.ContractInteractionsBlockChain
+	BlockChainContractInteractions chan []block.ContractInteractionsBlock
 	WorkAfterSynchronize           chan []interface{}
 	CurrentBlockId                 int
 

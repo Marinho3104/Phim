@@ -1,3 +1,4 @@
+import os
 import time
 import requests
 import _thread
@@ -49,7 +50,11 @@ while True:
 
     resp = input("1 - Send Transaction\n2 - Send Contract\n3 - Get Balance\n --> ")
 
-    if int(resp) == 1:
+    if resp == "":
+
+        os.system('cls')
+
+    elif int(resp) == 1:
 
         addressTo = input("Address to -> ")
         amount = input("Amount -> ")

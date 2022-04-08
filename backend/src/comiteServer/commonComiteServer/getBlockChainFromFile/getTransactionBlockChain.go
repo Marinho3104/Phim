@@ -66,9 +66,31 @@ func GetBlockChainFromFile(comiteServer *comite.ComiteServer) (int, error) {
 
 		json.Unmarshal(b, &_contractBlock)
 
-		_len++
-
 		comiteServer.BlockChainContract <- append(<-comiteServer.BlockChainContract, _contractBlock)
+
+	}
+
+	files, _ = ioutil.ReadDir(path + "\\data\\contractInteractionsBlockChain")
+
+	for i := 0; i < len(files); i++ {
+
+		file, err := os.Open(path + fmt.Sprintf("\\data\\contractInteractionsBlockChain\\%d", i))
+
+		if err != nil {
+			return _len, fmt.Errorf("UNABLE TO OPEN %s FILE", path+fmt.Sprintf("\\data\\contractInteractionsBlockChain\\%d", i))
+		}
+
+		b, err := ioutil.ReadAll(file)
+
+		if err != nil {
+			return _len, fmt.Errorf("UNABLE TO READ THE CONTENT OF %d FILE", i)
+		}
+
+		_contractInteractionBlock := block.ContractInteractionsBlock{}
+
+		json.Unmarshal(b, &_contractInteractionBlock)
+
+		comiteServer.BlockChainContractInteractions <- append(<-comiteServer.BlockChainContractInteractions, _contractInteractionBlock)
 
 	}
 

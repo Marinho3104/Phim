@@ -5,6 +5,7 @@ import comiteclientconnection "github.com/Marinho3104/Phim/src/structs/comite/co
 type ConfirmationContract struct {
 	Hash256              string
 	Contract             Contract
+	Interaction          ContractInteraction
 	ComiteChoose         comiteclientconnection.ComiteClientConnection
 	ComiteChooseResponse int
 	ComiteTotal          []comiteclientconnection.ComiteClientConnection
