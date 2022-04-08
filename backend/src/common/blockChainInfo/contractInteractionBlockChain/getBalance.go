@@ -1,6 +1,8 @@
 package contractinteractionblockchain
 
-import "github.com/Marinho3104/Phim/src/structs/block"
+import (
+	"github.com/Marinho3104/Phim/src/structs/block"
+)
 
 func GetBalance(contractInteractionBlockChain []block.ContractInteractionsBlock, address string) (balance int) {
 	balance = 0
@@ -11,7 +13,6 @@ func GetBalance(contractInteractionBlockChain []block.ContractInteractionsBlock,
 
 			if contractInteractionBlockChain[b].Data[t].Interactor == address {
 				balance -= contractInteractionBlockChain[b].Data[t].Fee
-
 			}
 			if contractInteractionBlockChain[b].Data[t].ComiteReviewerAddress == address {
 				balance += contractInteractionBlockChain[b].Data[t].Fee

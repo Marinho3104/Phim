@@ -4,12 +4,13 @@ class contractName(PhimChainContract.PhimChainContract):
 
     def initialization(self):
 
-        self.test = "olaa"
-
-        self.list = ["ola", 1]
-
-        self.sendTo("eu", 100000)
+        self.list = []
 
     def enter(self):
 
-        self.list.append(self.interactorInfo.address)
+        if self.interactorInfo.amount > 50:
+            self.list.append(self.interactorInfo.address)
+
+        if len(self.list) == 2:
+
+            self.sendTo(self.list[0], self.availabeBalance())

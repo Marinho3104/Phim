@@ -48,7 +48,7 @@ func HandleWork(comiteClient *comite.ComiteClient) {
 				} else if _headerSplit[0] == "Contract Creation" {
 					contractconfirmation.HandleContractConfirmation(comiteClient, respSplit[index:index+2])
 				} else if _headerSplit[0] == "Contract Interaction" {
-					contractinteractionconfirmation.HandleContractInteractionCofirmation()
+					contractinteractionconfirmation.HandleContractInteractionCofirmation(comiteClient, respSplit[index:index+2])
 				}
 			}
 

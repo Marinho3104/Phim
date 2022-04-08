@@ -40,6 +40,10 @@ func WriteExecuter(_contract contract.Contract, function string, arguments map[s
 
 func setArguments(variables map[string]interface{}) (variablesString string) {
 
+	if len(variables) == 0 {
+		return
+	}
+
 	for s, v := range variables {
 		switch value := v.(type) {
 		case int:

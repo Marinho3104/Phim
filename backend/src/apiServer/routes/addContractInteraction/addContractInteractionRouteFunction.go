@@ -37,8 +37,6 @@ func AddContractRouteFunction(_server *apiServer.ApiServer) gin.HandlerFunc {
 			return
 		}
 
-		fmt.Println(c.PostForm("args"))
-
 		var _currentContractInteraction contract.ContractInteraction = contract.ContractInteraction{
 
 			ContractAddress: c.PostForm("contractAddress"),

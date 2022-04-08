@@ -25,9 +25,15 @@ class WalletPhim:
 
         requests.post("http://localhost:8000/addContract", data = data, timeout=100)
 
+    def sendContractInteraction(self, amount, function, arguments):
+
+        data = {"address": self.address, "contractAddress": (self.address + "ª0"), "amount": amount, "function": function, "args": arguments, "fee": 1, "sign": "testContractInteraction", "c": 0}
+
+        requests.post("http://localhost:8000/addContractInteraction", data = data, timeout=100)
+
     def getBalance(self):
         
-        data = {"address": self.address}
+        data = {"address": self.address + "ª0"}
 
         resp = requests.post("http://localhost:8000/getBalance", data = data, timeout=100)
 
@@ -48,7 +54,7 @@ wallet = WalletPhim("eu", "o")
 
 while True:
 
-    resp = input("1 - Send Transaction\n2 - Send Contract\n3 - Get Balance\n --> ")
+    resp = input("1 - Send Transaction\n2 - Send Contract\n3 - Get Balance\n4 - Contract Interaction\n --> ")
 
     if resp == "":
 
@@ -68,4 +74,12 @@ while True:
     elif int(resp) == 3:
 
         print(wallet.getBalance())
+
+    elif int(resp) == 4:
+
+        function = input('Function -> ')
+        arguments = input('arguments -> ')
+        amount = input('amount -> ')
+
+        wallet.sendContractInteraction(amount, function, arguments)
 

@@ -8,7 +8,15 @@ import (
 	"github.com/Marinho3104/Phim/src/structs/contract"
 )
 
-func WriteContract(_contract contract.Contract, contractBalance int, c int, interactor string, interactorAmount int, fee int, variables map[string]interface{}, creation bool) {
+func WriteContract(_contract contract.Contract,
+	contractBalance int,
+	c int,
+	interactor string,
+	interactorAmount int,
+	fee int,
+	variables map[string]interface{},
+	creation bool,
+) {
 
 	code := string(_contract.Data)
 
@@ -69,6 +77,10 @@ func setVariables(variables map[string]interface{}) (variablesString string) {
 
 func SetArray(arr []interface{}) (variablesString string) {
 
+	if len(arr) == 0 {
+		return
+	}
+
 	for _, v := range arr {
 		switch value := v.(type) {
 		case int:
@@ -88,7 +100,7 @@ func SetArray(arr []interface{}) (variablesString string) {
 		}
 	}
 
-	variablesString = variablesString[:len(arr)-2]
+	variablesString = variablesString[:len(variablesString)-2]
 
 	return
 }
