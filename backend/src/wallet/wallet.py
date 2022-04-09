@@ -33,7 +33,7 @@ class WalletPhim:
 
     def getBalance(self):
         
-        data = {"address": self.address + "ª0"}
+        data = {"address": self.address}
 
         resp = requests.post("http://localhost:8000/getBalance", data = data, timeout=100)
 

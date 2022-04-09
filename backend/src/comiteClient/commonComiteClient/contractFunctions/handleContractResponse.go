@@ -16,7 +16,6 @@ func HandleContractResponse(resp []byte) (map[string]interface{}, error) {
 		return make(map[string]interface{}), errors.New("RESPONSE STRUCT FROM CONTRACT EXECUTION WRONG")
 
 	}
-
 	return _response, nil
 
 }
