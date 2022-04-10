@@ -21,7 +21,7 @@ class WalletPhim:
 
     def sendContract(self):
 
-        data = {"address": self.address, "contractName": "contractName", "data": self.getContractData("contractTest.py"), "c": self.cContract, "sign": "signtest", "fee": 1}
+        data = {"address": self.address, "contractName": "contractName", "data": self.getContractData("contractTest.py"), "c": self.cContract, "sign": "signtest", "fee": 1, "autoExec": "true"}
 
         requests.post("http://localhost:8000/addContract", data = data, timeout=100)
 

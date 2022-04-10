@@ -25,9 +25,17 @@ func SetBlockChains(comiteClient *comite.ComiteClient, _blockChainsInfo []string
 		return err
 	}
 
+	_contractAutoExecBlockChain := []block.ContractBlock{}
+
+	err = json.Unmarshal([]byte(_blockChainsInfo[2]), &_contractAutoExecBlockChain)
+
+	if err != nil {
+		return err
+	}
+
 	_contractInteractionBlockChain := []block.ContractInteractionsBlock{}
 
-	err = json.Unmarshal([]byte(_blockChainsInfo[2]), &_contractInteractionBlockChain)
+	err = json.Unmarshal([]byte(_blockChainsInfo[3]), &_contractInteractionBlockChain)
 
 	if err != nil {
 		return err
@@ -38,6 +46,8 @@ func SetBlockChains(comiteClient *comite.ComiteClient, _blockChainsInfo []string
 	comiteClient.BlockChainTransaction <- _transactionBlockChain
 
 	comiteClient.BlockChainContract <- _contractBlockChain
+
+	comiteClient.BlockChainContractAutoExec <- _contractAutoExecBlockChain
 
 	comiteClient.BlockChainContractInteractions <- _contractInteractionBlockChain
 

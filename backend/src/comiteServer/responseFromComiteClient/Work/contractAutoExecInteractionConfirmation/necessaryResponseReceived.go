@@ -1,17 +1,16 @@
-package contractinteractionconfirmation
+package contractautoexecinteractionconfirmation
 
 import (
 	"encoding/json"
+	"fmt"
 
 	confirmationcontract "github.com/Marinho3104/Phim/src/comiteServer/commonComiteServer/confirmationContract"
 	addcontractinteraction "github.com/Marinho3104/Phim/src/common/blockChainChanges/contract/addContractToBlockChain/addContractInteraction"
-	addtransactiontoblockchain "github.com/Marinho3104/Phim/src/common/blockChainChanges/transaction/addTransactionToBlockChain"
 	"github.com/Marinho3104/Phim/src/structs/comite"
 	"github.com/Marinho3104/Phim/src/structs/contract"
-	"github.com/Marinho3104/Phim/src/structs/transaction"
 )
 
-func userInteraction(comiteSever *comite.ComiteServer, confirmationContract contract.ConfirmationContract) {
+func autoExecInteraction(comiteSever *comite.ComiteServer, confirmationContract contract.ConfirmationContract) {
 	comiteResponseMajorityString := ""
 	_count := -1
 
@@ -32,19 +31,8 @@ func userInteraction(comiteSever *comite.ComiteServer, confirmationContract cont
 		return
 	}
 
-	_transaction := transaction.Transaction{
-		AddressFrom:           confirmationContract.Interaction.Interactor,
-		AddressTo:             confirmationContract.Interaction.ContractAddress,
-		Amount:                confirmationContract.Interaction.Amount,
-		C:                     -1,
-		Sign:                  confirmationContract.Interaction.Sign,
-		Fee:                   confirmationContract.Interaction.Fee,
-		ComiteReviewerAddress: confirmationContract.Interaction.ComiteReviewerAddress,
-	}
-
-	comiteSever.BlockChainTransaction <- addtransactiontoblockchain.AddTransactionToBlockChain(<-comiteSever.BlockChainTransaction, comiteSever.CurrentBlockId, _transaction)
-
 	if !comiteResponseMajority.Status {
+		fmt.Println("Refeused")
 		return
 	}
 
@@ -83,6 +71,6 @@ func userInteraction(comiteSever *comite.ComiteServer, confirmationContract cont
 
 func NecessaryResponsesReceived(comiteSever *comite.ComiteServer, confirmationContract contract.ConfirmationContract) {
 
-	userInteraction(comiteSever, confirmationContract)
+	autoExecInteraction(comiteSever, confirmationContract)
 
 }

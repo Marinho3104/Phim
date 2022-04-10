@@ -3,6 +3,7 @@ package work
 import (
 	"strings"
 
+	contractautoexec "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/contractAutoExec"
 	contractconfirmation "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/contractCreationConfirmation"
 	contractinteractionconfirmation "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/contractInteractionConfirmation"
 	"github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions/synchronization"
@@ -49,6 +50,8 @@ func HandleWork(comiteClient *comite.ComiteClient) {
 					contractconfirmation.HandleContractConfirmation(comiteClient, respSplit[index:index+2])
 				} else if _headerSplit[0] == "Contract Interaction" {
 					contractinteractionconfirmation.HandleContractInteractionCofirmation(comiteClient, respSplit[index:index+2])
+				} else if _headerSplit[0] == "Contract AutoExec" {
+					contractautoexec.HandleContractAutoExec(comiteClient, respSplit[index:index+2])
 				}
 			}
 

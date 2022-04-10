@@ -21,7 +21,7 @@ func AddContractRouteFunction(_server *apiServer.ApiServer) gin.HandlerFunc {
 		fmt.Sscan(c.PostForm("c"), &cValue)
 		fmt.Sscan(c.PostForm("fee"), &fee)
 
-		boolValue, err := strconv.ParseBool(c.PostForm("fee"))
+		boolValue, err := strconv.ParseBool(c.PostForm("autoExec"))
 
 		if err != nil {
 			c.String(http.StatusOK, "Done")

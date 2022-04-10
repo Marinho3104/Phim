@@ -21,8 +21,9 @@ type ComiteServer struct {
 	TransactionInConfirmation  chan []transaction.ConfirmationTransaction
 	BlockChainContractAutoExec chan []block.ContractBlock
 
-	BlockChainContract   chan []block.ContractBlock
-	ContractConfirmation chan []contract.ConfirmationContract
+	BlockChainContract           chan []block.ContractBlock
+	ContractConfirmation         chan []contract.ConfirmationContract
+	ContractConfirmationAutoExec chan []contract.ConfirmationContract
 
 	BlockChainContractInteractions chan []block.ContractInteractionsBlock
 

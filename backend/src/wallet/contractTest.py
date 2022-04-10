@@ -6,6 +6,10 @@ class contractName(PhimChainContract.PhimChainContract):
 
         self.list = []
 
+    def autoExecution(self):
+
+        self.sendTo("eu", 1)
+
     def enter(self):
 
         if self.interactorInfo.amount > 50:

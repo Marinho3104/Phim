@@ -45,8 +45,8 @@ class PhimChainContract():
 
     def sendTo(self, addressTo, amount) -> bool:
 
-        # if self.contractBalance < amount:
-        #     return False
+        if self.contractBalance < amount:
+            return False
         self.__operations.append(SendTo(self.address, addressTo, amount, self.c, self.fee))
         return True
 

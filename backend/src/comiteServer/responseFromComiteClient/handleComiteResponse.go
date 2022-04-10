@@ -3,6 +3,7 @@ package reponsefromcomiteclient
 import (
 	"strings"
 
+	contractautoexecinteractionconfirmation "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient/Work/contractAutoExecInteractionConfirmation"
 	contractcreationconfirmation "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient/Work/contractCreationConfirmation"
 	contractinteractionconfirmation "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient/Work/contractInteractionConfirmation"
 	transactionconfirmation "github.com/Marinho3104/Phim/src/comiteServer/responseFromComiteClient/Work/transactionConfirmation"
@@ -38,6 +39,8 @@ func HandleComiteResponse(comiteServer *comite.ComiteServer, _connClient comitec
 				contractcreationconfirmation.HandleContractCreationConfirmation(comiteServer, _connClient, headerSplit[1], _responseSplit[index+1])
 			} else if headerSplit[0] == "Contract Interaction" {
 				contractinteractionconfirmation.HandleContractInteractionConfirmation(comiteServer, _connClient, headerSplit[1], _responseSplit[index+1])
+			} else if headerSplit[0] == "Contract AutoExec" {
+				contractautoexecinteractionconfirmation.HandleContractInteractionConfirmation(comiteServer, _connClient, headerSplit[1], _responseSplit[index+1])
 			}
 		}
 

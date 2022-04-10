@@ -2,6 +2,7 @@ package contractcreationconfirmation
 
 import (
 	"encoding/json"
+	"fmt"
 
 	handleworkfunctions "github.com/Marinho3104/Phim/src/comiteClient/Work/handleWorkFunctions"
 	addcontract "github.com/Marinho3104/Phim/src/common/blockChainChanges/contract/addContractToBlockChain/addContract"
@@ -64,8 +65,12 @@ func HandleContractConfirmation(comiteClient *comite.ComiteClient, contractConfi
 		//Handle with error
 		comiteContractResponseByteForm, _ := json.Marshal(comiteContractResponse)
 
-		comiteClient.BlockChainContract <- addcontract.AddContractToBlockChain(<-comiteClient.BlockChainContract, comiteClient.CurrentBlockId, _contract)
-
+		if _contract.AutoExec {
+			fmt.Println("Auto exec")
+			comiteClient.BlockChainContractAutoExec <- addcontract.AddContractToBlockChain(<-comiteClient.BlockChainContractAutoExec, comiteClient.CurrentBlockId, _contract)
+		} else {
+			comiteClient.BlockChainContract <- addcontract.AddContractToBlockChain(<-comiteClient.BlockChainContract, comiteClient.CurrentBlockId, _contract)
+		}
 		if !cmp.Equal(_contractInteraction, contract.ContractInteraction{}) {
 			comiteClient.BlockChainContractInteractions <- addcontractinteraction.AddContractInteractionToBlockChain(<-comiteClient.BlockChainContractInteractions, comiteClient.CurrentBlockId, _contractInteraction)
 		}

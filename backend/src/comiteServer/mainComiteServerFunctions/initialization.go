@@ -27,7 +27,9 @@ func Initialization(addr string, port string) *comite.ComiteServer {
 		BlockChainContract:             make(chan []block.ContractBlock, 1),
 		ContractConfirmation:           make(chan []contract.ConfirmationContract, 1),
 		TransactionInConfirmation:      make(chan []transaction.ConfirmationTransaction, 1),
+		BlockChainContractAutoExec:     make(chan []block.ContractBlock, 1),
 		BlockChainContractInteractions: make(chan []block.ContractInteractionsBlock, 1),
+		ContractConfirmationAutoExec:   make(chan []contract.ConfirmationContract, 1),
 		TransactionGroup:               []comiteclientconnection.ComiteClientConnection{},
 		Count:                          make(chan int, 1),
 	}
@@ -55,9 +57,13 @@ func initializaVariablesComiteServer(comiteServer *comite.ComiteServer) {
 
 	comiteServer.BlockChainTransaction <- []block.TransactionBlock{}
 
+	comiteServer.ContractConfirmationAutoExec <- []contract.ConfirmationContract{}
+
 	comiteServer.BlockChainContract <- []block.ContractBlock{}
 
 	comiteServer.TransactionInConfirmation <- []transaction.ConfirmationTransaction{}
+
+	comiteServer.BlockChainContractAutoExec <- []block.ContractBlock{}
 
 	comiteServer.BlockChainContractInteractions <- []block.ContractInteractionsBlock{}
 

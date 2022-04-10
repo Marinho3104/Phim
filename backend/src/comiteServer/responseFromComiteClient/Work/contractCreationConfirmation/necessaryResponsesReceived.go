@@ -2,6 +2,7 @@ package contractcreationconfirmation
 
 import (
 	"encoding/json"
+	"fmt"
 
 	confirmationcontract "github.com/Marinho3104/Phim/src/comiteServer/commonComiteServer/confirmationContract"
 	addcontract "github.com/Marinho3104/Phim/src/common/blockChainChanges/contract/addContractToBlockChain/addContract"
@@ -36,7 +37,11 @@ func NecessaryResponsesReceived(comiteSever *comite.ComiteServer, confirmationCo
 
 		confirmationContract.Contract.ContractAddress = ""
 
-		comiteSever.BlockChainContract <- addcontract.AddContractToBlockChain(<-comiteSever.BlockChainContract, comiteSever.CurrentBlockId, confirmationContract.Contract)
+		if confirmationContract.Contract.AutoExec {
+			comiteSever.BlockChainContractAutoExec <- addcontract.AddContractToBlockChain(<-comiteSever.BlockChainContractAutoExec, comiteSever.CurrentBlockId, confirmationContract.Contract)
+		} else {
+			comiteSever.BlockChainContract <- addcontract.AddContractToBlockChain(<-comiteSever.BlockChainContract, comiteSever.CurrentBlockId, confirmationContract.Contract)
+		}
 
 		return
 
@@ -69,8 +74,12 @@ func NecessaryResponsesReceived(comiteSever *comite.ComiteServer, confirmationCo
 		Variables:       _variables,
 	}
 
-	comiteSever.BlockChainContract <- addcontract.AddContractToBlockChain(<-comiteSever.BlockChainContract, comiteSever.CurrentBlockId, confirmationContract.Contract)
-
+	if confirmationContract.Contract.AutoExec {
+		fmt.Println("Auto exec")
+		comiteSever.BlockChainContractAutoExec <- addcontract.AddContractToBlockChain(<-comiteSever.BlockChainContractAutoExec, comiteSever.CurrentBlockId, confirmationContract.Contract)
+	} else {
+		comiteSever.BlockChainContract <- addcontract.AddContractToBlockChain(<-comiteSever.BlockChainContract, comiteSever.CurrentBlockId, confirmationContract.Contract)
+	}
 	comiteSever.BlockChainContractInteractions <- addcontractinteraction.AddContractInteractionToBlockChain(<-comiteSever.BlockChainContractInteractions, comiteSever.CurrentBlockId, _contractInteraction)
 
 	confirmationcontract.HandleOperations(comiteSever, _operations)
