@@ -49,7 +49,6 @@ func HandleContractAutoExec(comiteClient *comite.ComiteClient, contractInteracti
 	}
 
 	resp, err := GetExecutionResponse(comiteClient, _contract, _contractInteraction, _lastInteraction.Variables)
-
 	comiteContractResponse := contract.ConfirmationContractComiteClient{
 		Status:   false,
 		Response: make(map[string]interface{}),

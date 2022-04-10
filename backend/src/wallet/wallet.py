@@ -7,7 +7,7 @@ class WalletPhim:
 
     def __init__(self, address, privateAddress):
 
-        self.url = "http://6803-85-247-155-100.ngrok.io/"
+        self.url = "http://localhost:8000/"
 
         self.address = address
         self.privateAddress = privateAddress

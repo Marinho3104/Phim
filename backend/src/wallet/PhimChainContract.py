@@ -9,14 +9,16 @@ class InteractorInfo:
 
 class SendTo:
 
-    def __init__(self,addressFrom,  addressTo, amount):
+    def __init__(self,addressFrom,  addressTo, amount, c, fee):
 
         self.addressFrom =  addressFrom # fixInvalidCaracthers(addressFrom)
         self.addressTo = addressTo# fixInvalidCaracthers(addressTo)
         self.amount = amount
+        self.c = c
+        self.fee = fee
 
     def __repr__(self) -> str:
-        return f"""{{ "addressFrom": "{self.addressFrom}", "addressTo": "{self.addressTo}", "amount": {self.amount} }}"""
+        return f"""{{ "addressFrom": "{self.addressFrom}", "addressTo": "{self.addressTo}", "amount": {self.amount}, "c": {self.c}, "fee": {self.fee} }}"""
  
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
@@ -28,12 +30,13 @@ def fixInvalidCaracthers(string: str):
 
 class PhimChainContract():
 
-    def __init__(self, address, contractBalance, fee, interactorInfo: InteractorInfo) -> None:
+    def __init__(self, address, contractBalance, fee, c, interactorInfo: InteractorInfo) -> None:
         
         self.address = address
         self.contractBalance = contractBalance
         self.fee = fee
         self.interactorInfo = interactorInfo
+        self.c = c
         self.__operations = []
 
     def availabeBalance(self):
@@ -44,7 +47,7 @@ class PhimChainContract():
 
         if self.contractBalance < amount:
             return False
-        self.__operations.append(SendTo(self.address, addressTo, amount))
+        self.__operations.append(SendTo(self.address, addressTo, amount, self.c, self.fee))
         return True
 
     def __del__(self):
@@ -58,7 +61,7 @@ class PhimChainContract():
 
         print("{")
 
-        for _ in range(4, len(_var)):
+        for _ in range(5, len(_var)):
 
             if type(val_list[_]) is str:
                 _value = f"\"{val_list[_]}\""

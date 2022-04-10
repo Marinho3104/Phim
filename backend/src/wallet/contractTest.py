@@ -1,3 +1,4 @@
+import time
 import PhimChainContract
 
 class contractName(PhimChainContract.PhimChainContract):
@@ -6,15 +7,12 @@ class contractName(PhimChainContract.PhimChainContract):
 
         self.list = []
 
+        self.currentTime = time.time()
+
     def autoExecution(self):
 
-        self.sendTo("eu", 1)
+        if time.time() - self.currentTime >= 15.0:
+            self.sendTo("eu", 1)
+            self.currentTime = time.time()
 
-    def enter(self):
 
-        if self.interactorInfo.amount > 50:
-            self.list.append(self.interactorInfo.address)
-
-        if len(self.list) == 2:
-
-            self.sendTo(self.list[0], self.availabeBalance())

@@ -63,15 +63,16 @@ func NecessaryResponsesReceived(comiteSever *comite.ComiteServer, confirmationCo
 	}
 
 	_contractInteraction := contract.ContractInteraction{
-		ContractAddress: confirmationContract.Contract.ContractAddress,
-		Interactor:      confirmationContract.Contract.CreatorAddress,
-		Amount:          0,
-		Function:        "initialization",
-		Arguments:       make(map[string]interface{}),
-		Fee:             confirmationContract.Contract.Fee,
-		Sign:            confirmationContract.Contract.Sign,
-		C:               confirmationContract.Contract.C,
-		Variables:       _variables,
+		ContractAddress:       confirmationContract.Contract.ContractAddress,
+		Interactor:            confirmationContract.Contract.CreatorAddress,
+		Amount:                0,
+		Function:              "initialization",
+		Arguments:             make(map[string]interface{}),
+		Fee:                   confirmationContract.Contract.Fee,
+		Sign:                  confirmationContract.Contract.Sign,
+		C:                     confirmationContract.Contract.C,
+		Variables:             _variables,
+		ComiteReviewerAddress: confirmationContract.ComiteChoose.Address,
 	}
 
 	if confirmationContract.Contract.AutoExec {
