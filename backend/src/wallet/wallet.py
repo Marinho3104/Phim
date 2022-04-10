@@ -7,6 +7,8 @@ class WalletPhim:
 
     def __init__(self, address, privateAddress):
 
+        self.url = "http://6803-85-247-155-100.ngrok.io/"
+
         self.address = address
         self.privateAddress = privateAddress
         self.currentBalance = 0
@@ -17,25 +19,25 @@ class WalletPhim:
         
         data = {"addressFrom": self.address, "addressTo": addressTo, "amount": amount, "c": self.cTransaction, "sign": "", "fee": 1}
 
-        requests.post("http://localhost:8000/addTransation", data = data, timeout=100)
+        requests.post(self.url + "addTransation", data = data, timeout=100)
 
     def sendContract(self):
 
         data = {"address": self.address, "contractName": "contractName", "data": self.getContractData("contractTest.py"), "c": self.cContract, "sign": "signtest", "fee": 1, "autoExec": "true"}
 
-        requests.post("http://localhost:8000/addContract", data = data, timeout=100)
+        requests.post(self.url + "addContract", data = data, timeout=100)
 
     def sendContractInteraction(self, amount, function, arguments):
 
         data = {"address": self.address, "contractAddress": (self.address + "ª0"), "amount": amount, "function": function, "args": arguments, "fee": 1, "sign": "testContractInteraction", "c": 0}
 
-        requests.post("http://localhost:8000/addContractInteraction", data = data, timeout=100)
+        requests.post("addContractInteraction", data = data, timeout=100)
 
     def getBalance(self):
         
         data = {"address": self.address}
 
-        resp = requests.post("http://localhost:8000/getBalance", data = data, timeout=100)
+        resp = requests.post(self.url + "getBalance", data = data, timeout=100)
 
         self.currentBalance = int(resp.text)
 
