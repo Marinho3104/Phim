@@ -11,7 +11,7 @@ type ComiteClient struct {
 
 	Synchronized bool
 
-	WorkInQueue chan string
+	WorkInQueue chan []byte
 
 	BlockChainTransaction          chan []block.TransactionBlock
 	BlockChainContract             chan []block.ContractBlock

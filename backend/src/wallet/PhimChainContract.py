@@ -7,22 +7,24 @@ class InteractorInfo:
         self.address = address
         self.amount = amount
 
+class DisableContract:
+
+    def __init__(self):
+
+        self.operationType = "DisableContract"
+
 class SendTo:
 
     def __init__(self,addressFrom,  addressTo, amount, c, fee):
 
+        self.operationType = "Transaction"
         self.addressFrom =  addressFrom # fixInvalidCaracthers(addressFrom)
         self.addressTo = addressTo# fixInvalidCaracthers(addressTo)
         self.amount = amount
         self.c = c
         self.fee = fee
 
-    def __repr__(self) -> str:
-        return f"""{{ "addressFrom": "{self.addressFrom}", "addressTo": "{self.addressTo}", "amount": {self.amount}, "c": {self.c}, "fee": {self.fee} }}"""
- 
-    def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, 
-            sort_keys=True, indent=4)
+
 
 def fixInvalidCaracthers(string: str):
         
@@ -49,6 +51,10 @@ class PhimChainContract():
             return False
         self.__operations.append(SendTo(self.address, addressTo, amount, self.c, self.fee))
         return True
+
+    def disableContract(self):
+
+        self.__operations.append(DisableContract())
 
     def __del__(self):
 

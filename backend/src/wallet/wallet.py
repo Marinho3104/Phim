@@ -23,7 +23,7 @@ class WalletPhim:
 
     def sendContract(self):
 
-        data = {"address": self.address, "contractName": "contractName", "data": self.getContractData("contractTest.py"), "c": self.cContract, "sign": "signtest", "fee": 1, "autoExec": "true"}
+        data = {"address": self.address, "contractName": "contractName", "data": self.getContractData("contractTest.py"), "c": self.cContract, "sign": "signtest", "fee": 1, "autoExec": "false", "blockChain": "true"}
 
         requests.post(self.url + "addContract", data = data, timeout=100)
 
@@ -31,7 +31,7 @@ class WalletPhim:
 
         data = {"address": self.address, "contractAddress": (self.address + "ª0"), "amount": amount, "function": function, "args": arguments, "fee": 1, "sign": "testContractInteraction", "c": 0}
 
-        requests.post("addContractInteraction", data = data, timeout=100)
+        requests.post(self.url + "addContractInteraction", data = data, timeout=100)
 
     def getBalance(self):
         
